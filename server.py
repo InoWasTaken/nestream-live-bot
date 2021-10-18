@@ -96,5 +96,8 @@ def verify_signature(headers, body):
 
 
 client.start(DISCORD_TOKEN)
+
 if ENV == "dev":
     app.run(port=5000, debug=True)
+else:
+    app.run(host='0.0.0.0', port=8000, debug=False)
