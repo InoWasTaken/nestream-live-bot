@@ -1,9 +1,9 @@
-import sys
-import os
-import hmac
 import hashlib
-import requests
+import hmac
 import json
+import os
+import requests
+import sys
 
 TWITCH_SECRET = os.getenv('TWITCH_SECRET')
 
