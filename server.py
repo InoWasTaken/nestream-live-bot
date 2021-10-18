@@ -8,6 +8,7 @@ from quart import Quart, request, abort
 TWITCH_SECRET = os.getenv('TWITCH_SECRET')
 DISCORD_TOKEN = os.getenv('DISCORD_TOKEN')
 DISCORD_GUILD = int(os.getenv('DISCORD_GUILD'))
+ENV = os.getenv('ENV')
 
 app = Quart(__name__)
 client = discord.Client()
@@ -95,4 +96,5 @@ def verify_signature(headers, body):
 
 
 client.start(DISCORD_TOKEN)
-app.run(port=5000, debug=True)
+if ENV == "dev":
+    app.run(port=5000, debug=True)
