@@ -45,9 +45,15 @@ def find_discord_infos(user_login):
 
 async def write_discord_announcement(channel, role, user_name, user_login):
     if role is None:
-        await channel.send(f"📢 Hello !\n{user_name} vient de lancer un live !\n➡️ Rejoins nous sur https://twitch.tv/{user_login}")
+        message = f"📢 Hello !\n{user_name} vient de lancer un live !\n➡️ Rejoins nous sur https://twitch.tv/{user_login}"
     else:
-        await channel.send(f"📢 Hello ||<@&{role.id}>|| !\n{user_name} vient de lancer un live !\n➡️ Rejoins nous sur https://twitch.tv/{user_login}")
+        message = f"📢 Hello ||<@&{role.id}>|| !\n{user_name} vient de lancer un live !\n➡️ Rejoins nous sur https://twitch.tv/{user_login}"
+
+    try:
+        await channel.send(message)
+    except asyncio.TimeoutError:
+        await before_serving()
+        await channel.send(message)
 
 
 @app.before_serving
